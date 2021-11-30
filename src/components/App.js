@@ -4,6 +4,18 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import "./App.css";
+import Amplify, { API } from "aws-amplify";
+
+Amplify.configure({
+  API: {
+    endpoints: [
+      {
+        name: "machinespraak_api",
+        endpoint: " https://apbgvy0jhh.execute-api.eu-west-1.amazonaws.com",
+      },
+    ],
+  },
+});
 
 const App = () => {
   const [file, setFile] = useState(null);
@@ -13,7 +25,11 @@ const App = () => {
   };
 
   useEffect(() => {
-    console.log(file);
+    const fetchData = async () => {
+      const res = await API.get("machinespraak_api", "/dev");
+      console.log(res);
+    };
+    fetchData();
   }, [file]);
 
   return (
