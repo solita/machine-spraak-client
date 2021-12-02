@@ -9,10 +9,10 @@ from aws_cdk import core as cdk
 # being updated to use `cdk`.  You may delete this import if you don't need it.
 from aws_cdk import core
 
-from client.infrastructure import AmplifyInfraStack
+from client.infrastructure import MachineSpraakInfraStackTest
 
 app = core.App()
-AmplifyInfraStack(app, "AmplifyInfraStack",
+MachineSpraakInfraStackTest(app, "MachineSpraakInfraStackTest",
                   # If you don't specify 'env', this stack will be environment-agnostic.
                   # Account/Region-dependent features and context lookups will not work,
                   # but a single synthesized template can be deployed anywhere.

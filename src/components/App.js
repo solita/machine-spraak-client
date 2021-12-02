@@ -11,7 +11,7 @@ Amplify.configure({
     endpoints: [
       {
         name: "machinespraak_api",
-        endpoint: " https://apbgvy0jhh.execute-api.eu-west-1.amazonaws.com",
+        endpoint: process.env.REACT_APP_API_URL,
       },
     ],
   },
@@ -26,9 +26,10 @@ const App = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await API.get("machinespraak_api", "/dev");
+      const res = await API.get("machinespraak_api", "");
       console.log(res);
     };
+    console.log("API_URL: ", process.env.REACT_APP_API_URL);
     fetchData();
   }, [file]);
 
