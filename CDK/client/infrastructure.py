@@ -4,6 +4,7 @@ from aws_cdk import aws_s3 as s3
 from aws_cdk import aws_lambda as _lambda
 from aws_cdk import aws_dynamodb as dynamodb
 from aws_cdk import aws_apigateway as apigw
+import aws_cdk.aws_codebuild as codebuild
 
 
 class MachineSpraakInfraStackTest(cdk.Stack):
@@ -64,13 +65,13 @@ class MachineSpraakInfraStackTest(cdk.Stack):
         audio_metadata_table.grant_read_data(api_lambda)
         bucket.grant_read_write(api_lambda)
 
-        # The full ARN of a plaintext secret in AWS Secret Manager
-        # containing a personal Github access token valid for this repo
-        token_secret_ARN = ""
+        # ARN of Github access token in AWS Secrets Manager
+        token_secret_ARN = "arn:aws:secretsmanager:eu-west-1:166362138053:secret:github-token-VZkAme"
 
-        # ApiGW endpoint
+        # ApiGW endpoint for Amplify
         apigw_URL = base_api.url
-
+        
+        # Create Amplify app from Github repo
         amplify_app = amplify.App(self, "machine-spraak-client",
                                   source_code_provider=amplify.GitHubSourceCodeProvider(
                                       owner="solita",
@@ -78,6 +79,25 @@ class MachineSpraakInfraStackTest(cdk.Stack):
                                       oauth_token=cdk.SecretValue.secrets_manager(
                                           secret_id=token_secret_ARN
                                       )
-                                  ), environment_variables={"API_URL": apigw_URL},)
+                                  ), environment_variables={"API_URL": apigw_URL},
+                                  build_spec=codebuild.BuildSpec.from_object_to_yaml({  # Alternatively add a `amplify.yml` to the repo root
+                                      "version": "1.0",
+                                      "frontend": {
+                                          "phases": {
+                                              "preBuild": {
+                                                  "commands": ["yarn install"]
+                                              },
+                                              "build": {
+                                                  "commands": ["echo \"REACT_APP_API_URL=$API_URL\" >> .env", "yarn run build"]
+                                              }
+                                          },
+                                          "artifacts": {
+                                              "baseDirectory": "build",
+                                              "files": ["**/*"]
+                                          },
+                                          "cache": {
+                                              "paths": ["node_modules/**/*"]
+                                          }
+                                      }}))
 
         amplify_app.add_branch("api-test")
