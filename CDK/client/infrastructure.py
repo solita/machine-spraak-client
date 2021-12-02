@@ -18,11 +18,7 @@ class MachineSpraakInfraStackTest(cdk.Stack):
         base_api = apigw.RestApi(self, 'MachineSpraakApiGWTest',
                                  rest_api_name='machinespraak_api',
                                  description='Fetch data from DynamoDB',
-                                 deploy_options=api_stage_options,
-                                 default_cors_preflight_options=apigw.CorsOptions(
-                                     allow_origins=apigw.Cors.ALL_ORIGINS,
-                                     allow_methods=apigw.Cors.ALL_METHODS
-                                 )
+                                 deploy_options=api_stage_options
                                  )
 
         # Create a resource named items on the base API

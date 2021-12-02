@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
@@ -24,14 +24,14 @@ const App = () => {
     setFile(event.target.files[0]);
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await API.get("machinespraak_api", "/audio_analysis");
-      console.log(res);
-    };
-    console.log("API_URL: ", process.env.REACT_APP_API_URL);
-    fetchData();
-  }, [file]);
+  const handleUpload = async () => {
+    try {
+      const response = await API.get("machinespraak_api", "/audio_analysis");
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Container fluid="md">
@@ -39,7 +39,7 @@ const App = () => {
         <Col md="10" xs="10">
           <Form.Group controlId="formFileLg" className="mb-3">
             <Form.Label>
-              <h4>Choose data to analyze</h4>
+              <h4>Upload a file</h4>
             </Form.Label>
             <Form.Control
               type="file"
@@ -53,9 +53,7 @@ const App = () => {
         <Col md="10" xs="10">
           <div>
             <pre>
-              {file && file.size + " bytes"}
-              <br />
-              {file && file.type}
+              <button onClick={handleUpload}>Upload</button>{" "}{file && file.size + " bytes"}{file && file.type && ", " + file.type}
             </pre>
           </div>
         </Col>
