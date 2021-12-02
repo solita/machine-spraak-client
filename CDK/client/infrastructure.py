@@ -15,10 +15,6 @@ class MachineSpraakInfraStackTest(cdk.Stack):
         api_stage_options = apigw.StageOptions(stage_name="dev")
 
         # Create base api
-
-        # allow_origins=["https://amazon.com"],
-        #allow_methods=["GET", "PUT"]
-        #
         base_api = apigw.RestApi(self, 'MachineSpraakApiGWTest',
                                  rest_api_name='machinespraak_api',
                                  description='Fetch data from DynamoDB',

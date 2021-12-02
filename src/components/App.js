@@ -26,7 +26,7 @@ const App = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await API.get("machinespraak_api", "");
+      const res = await API.get("machinespraak_api", "/audio_analysis");
       console.log(res);
     };
     console.log("API_URL: ", process.env.REACT_APP_API_URL);
