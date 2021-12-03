@@ -1,8 +1,0 @@
-aws-cdk.core>=1.134.0
-aws-cdk.assertions>=1.134.0
-aws-cdk.aws-amplify>=1.134.0
-aws-cdk.aws-s3>=1.134.0
-aws-cdk.aws-lambda>=1.134.0
-aws-cdk.aws-dynamodb>=1.134.0
-aws-cdk.aws-apigateway>=1.134.0
-aws-cdk.aws-codebuild>=1.134.0
