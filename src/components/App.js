@@ -7,12 +7,15 @@ import Spinner from "react-bootstrap/Spinner";
 import "./App.css";
 import Amplify, { API } from "aws-amplify";
 
+// https://v3c97uoaqe.execute-api.eu-west-1.amazonaws.com/dev/
+// process.env.REACT_APP_API_URL
+
 Amplify.configure({
   API: {
     endpoints: [
       {
         name: "machinespraak_api",
-        endpoint: process.env.REACT_APP_API_URL,
+        endpoint: "https://v3c97uoaqe.execute-api.eu-west-1.amazonaws.com/dev/",
       },
     ],
   },
@@ -40,7 +43,7 @@ const App = () => {
   const handleUpload = async () => {
     try {
       setLoading(true);
-      const response = await API.get("machinespraak_api", "/audio_analysis");
+      const response = await postFile();
       setResponse(response);
     } catch (error) {
       console.log(error);
@@ -48,6 +51,23 @@ const App = () => {
     }
     setLoading(false);
     handleReset();
+  };
+
+  const postFile = async () => {
+    const apiName = "machinespraak_api";
+    const path = "/audio_analysis";
+
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("file_name", file.name);
+
+    const content = {
+      body: formData,
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    };
+    return await API.post(apiName, path, content);
   };
 
   return (
@@ -60,6 +80,7 @@ const App = () => {
             </Form.Label>
             <Form.Control
               type="file"
+              encType="multipart/form-data"
               size="lg"
               onChange={(event) => handleSelectFile(event)}
               ref={fileInputRef}
@@ -78,7 +99,9 @@ const App = () => {
               {error}
             </pre>
           </div>
-          <div className="mt-1">{loading && <Spinner animation="border" role="status" />}</div>
+          <div className="mt-1">
+            {loading && <Spinner animation="border" role="status" />}
+          </div>
         </Col>
       </Row>
     </Container>
