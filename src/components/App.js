@@ -7,21 +7,21 @@ import Spinner from "react-bootstrap/Spinner";
 import "./App.css";
 import Amplify, { API } from "aws-amplify";
 
-// https://v3c97uoaqe.execute-api.eu-west-1.amazonaws.com/dev/
-// process.env.REACT_APP_API_URL
-
 Amplify.configure({
   API: {
     endpoints: [
       {
         name: "machinespraak_api",
-        endpoint: "https://v3c97uoaqe.execute-api.eu-west-1.amazonaws.com/dev/",
+        endpoint: process.env.REACT_APP_API_URL,
       },
     ],
   },
 });
 
 const App = () => {
+  const MAX_FILE_SIZE = 6000000;
+  const SUPPORTED_FILE_TYPE = "audio/wav";
+
   const [file, setFile] = useState(null);
   const [response, setResponse] = useState("");
   const [error, setError] = useState("");
@@ -30,6 +30,16 @@ const App = () => {
   const fileInputRef = useRef();
 
   const handleSelectFile = (event) => {
+    if (event.target.files[0].size > MAX_FILE_SIZE) {
+      setError("Maximum file size is " + MAX_FILE_SIZE + " bytes");
+      handleReset();
+      return;
+    }
+    if (event.target.files[0].type !== SUPPORTED_FILE_TYPE) {
+      setError("File type must be " + SUPPORTED_FILE_TYPE);
+      handleReset();
+      return;
+    }
     setFile(event.target.files[0]);
     setResponse("");
     setError("");
