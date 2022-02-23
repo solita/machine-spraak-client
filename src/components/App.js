@@ -20,7 +20,7 @@ Amplify.configure({
 
 const App = () => {
   const MAX_FILE_SIZE = 6000000;
-  const SUPPORTED_FILE_TYPE = "audio/wav";
+  const SUPPORTED_FILE_TYPES = ["audio/wav", "audio/x-wav"];
 
   const [file, setFile] = useState(null);
   const [response, setResponse] = useState("");
@@ -35,8 +35,9 @@ const App = () => {
       handleReset();
       return;
     }
-    if (event.target.files[0].type !== SUPPORTED_FILE_TYPE) {
-      setError("File type must be " + SUPPORTED_FILE_TYPE);
+    if (!SUPPORTED_FILE_TYPES.includes(event.target.files[0].type)) {
+      console.log(event.target.files[0].type)
+      setError("File type must be one of: " + SUPPORTED_FILE_TYPES + ".");
       handleReset();
       return;
     }

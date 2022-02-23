@@ -20,7 +20,7 @@ test("file input form should not accept invalid file type", () => {
   const fileInput = screen.getByLabelText(fileFormLabel);
   fireEvent.change(fileInput, { target: { files: [invalidFile] } });
 
-  expect(queryByText("File type must be audio/wav")).toBeInTheDocument();
+  expect(queryByText("File type must be one of: audio/wav,audio/x-wav.")).toBeInTheDocument();
   expect(queryByText("Upload")).not.toBeInTheDocument();
 });
 
