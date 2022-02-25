@@ -7,7 +7,7 @@ import Spinner from "react-bootstrap/Spinner";
 import "./App.css";
 import Amplify, { API } from "aws-amplify";
 
-const API_VERSION = "v0";
+const API_VERSION = "v1";
 
 Amplify.configure({
   API: {
