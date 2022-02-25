@@ -7,12 +7,14 @@ import Spinner from "react-bootstrap/Spinner";
 import "./App.css";
 import Amplify, { API } from "aws-amplify";
 
+const API_VERSION = "v0";
+
 Amplify.configure({
   API: {
     endpoints: [
       {
         name: "machinespraak_api",
-        endpoint: process.env.REACT_APP_API_URL,
+        endpoint: process.env.REACT_APP_API_URL + API_VERSION,
       },
     ],
   },
