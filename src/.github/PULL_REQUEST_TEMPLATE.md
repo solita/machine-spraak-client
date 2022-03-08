@@ -3,9 +3,9 @@
 <!-- E.g. Is it a new feature, bugfix, code improvement etc. ? Add some description. -->
 
 
-### Possible link to Kanban task/ JIRA?
+### Possible URL(s) to Kanban task/ JIRA?
 
-<!-- E.g. https://miro.com/app/board/o9J_lroWJpc=/?moveToWidget=3458764520481035341&cot=14 -->
+<!-- E.g. URL to Miro task or the JIRA ticket  -->
 
 
 ### Checklist
