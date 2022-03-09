@@ -24,4 +24,4 @@
 
 ## Screenshots / Screen recordings
 
-Optionally add some screenshot(s) / screen recordings so that reviewrs can easily visualize the changes
+Optionally add some screenshot(s) / screen recordings so that reviewers can easily visualize the changes
