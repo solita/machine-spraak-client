@@ -37,4 +37,4 @@ async function postFile(file:any):Promise<string>{
       return UNEXPECTED_SERVER_ERROR;
   }
 };
-export default {postFile};
+export  {postFile};
