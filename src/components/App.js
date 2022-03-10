@@ -4,19 +4,8 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Spinner from "react-bootstrap/Spinner";
+import * as AudioAnalysisService from "../services/AudioAnalysisService";
 import "./App.css";
-import Amplify, { API } from "aws-amplify";
-
-Amplify.configure({
-  API: {
-    endpoints: [
-      {
-        name: "machinespraak_api",
-        endpoint: process.env.REACT_APP_API_URL,
-      },
-    ],
-  },
-});
 
 const App = () => {
   const MAX_FILE_SIZE = 6000000;
@@ -54,7 +43,7 @@ const App = () => {
   const handleUpload = async () => {
     try {
       setLoading(true);
-      const response = await postFile();
+      const response = await AudioAnalysisService.postFile(file);
       setResponse(response);
     } catch (error) {
       console.log(error);
@@ -62,23 +51,6 @@ const App = () => {
     }
     setLoading(false);
     handleReset();
-  };
-
-  const postFile = async () => {
-    const apiName = "machinespraak_api";
-    const path = "/audio_analysis";
-
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("file_name", file.name);
-
-    const content = {
-      body: formData,
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    };
-    return await API.post(apiName, path, content);
   };
 
   return (
