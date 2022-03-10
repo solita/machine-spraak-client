@@ -5,7 +5,6 @@
     },
     "extends": [
         "plugin:react/recommended",
-        "plugin:prettier/recommended",
         "airbnb"
     ],
     "parser": "@typescript-eslint/parser",
@@ -24,8 +23,6 @@
         "curly":"error",
         "eqeqeq":"error",
         "no-console":"error",
-        "no-unused-vars":"error",
-
-
+        "no-unused-vars":"error"
     }
 }
