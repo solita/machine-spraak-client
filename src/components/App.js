@@ -1,3 +1,4 @@
+import React from "react";
 import { useRef, useState } from "react";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
@@ -25,7 +26,6 @@ const App = () => {
       return;
     }
     if (!SUPPORTED_FILE_TYPES.includes(event.target.files[0].type)) {
-      console.log(event.target.files[0].type)
       setError("File type must be one of: " + SUPPORTED_FILE_TYPES + ".");
       handleReset();
       return;
@@ -46,7 +46,6 @@ const App = () => {
       const response = await AudioAnalysisService.postFile(file);
       setResponse(response);
     } catch (error) {
-      console.log(error);
       setError(error.message);
     }
     setLoading(false);
