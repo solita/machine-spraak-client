@@ -22,7 +22,6 @@
     "isolatedModules": true,
     "importsNotUsedAsValues": "remove",
     "noEmit": true,
-    "jsx": "react"
-  },
-
+    "jsx": "react-jsx"
+  }
 }
