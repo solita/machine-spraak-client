@@ -5,8 +5,7 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Spinner from "react-bootstrap/Spinner";
-import * as AudioAnalysisService from "../services/AudioAnalysisService";
-import "./App.css";
+import * as AudioAnalysisService from "./services/AudioAnalysisService";
 
 const App = () => {
   const MAX_FILE_SIZE = 6000000;
