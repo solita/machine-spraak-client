@@ -12,4 +12,4 @@ describe("UploadFile", ()=>{
         render(testComponent);
         expect(screen.getByRole("heading",{name:"Upload a file"}));
     });
-})
+});
