@@ -4,7 +4,7 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Spinner from "react-bootstrap/Spinner";
-import * as AudioAnalysisService from "../services/AudioAnalysisService";
+import * as AudioAnalysisService from "../../services/AudioAnalysisService";
 
 const MAX_FILE_SIZE_BYTES = 6000000;
 const SUPPORTED_FILE_TYPES = ["audio/wav", "audio/x-wav"];
