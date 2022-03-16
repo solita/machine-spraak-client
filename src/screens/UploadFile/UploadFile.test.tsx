@@ -1,6 +1,6 @@
 import { render,screen } from "@testing-library/react";
 import React, { ReactElement } from "react";
-import UploadFile from "./UploadFile/UploadFile";
+import UploadFile from "./UploadFile";
 
 describe("UploadFile", ()=>{
     let testComponent:ReactElement;
