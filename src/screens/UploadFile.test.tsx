@@ -5,7 +5,7 @@ import UploadFile from "./UploadFile";
 describe("UploadFile", ()=>{
     let testComponent:ReactElement;
     beforeEach(()=>{
-        testComponent = <UploadFile/>
+        testComponent = <UploadFile/>;
     });
 
     it("Rendering the component",()=>{

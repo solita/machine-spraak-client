@@ -87,7 +87,7 @@ const UploadFile = ():ReactElement=>{
           </Col>
         </Row>
       </Container>
-    )
+    );
 };
 
 export default UploadFile;

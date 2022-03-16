@@ -22,7 +22,8 @@
         "curly":"error",
         "eqeqeq":"error",
         "no-console":"error",
-        "no-unused-vars":"error"
+        "no-unused-vars":"error",
+        "semi":"error"
     },
     "settings": {
         "react":{
