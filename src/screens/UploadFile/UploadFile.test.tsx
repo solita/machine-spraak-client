@@ -10,6 +10,6 @@ describe("UploadFile", ()=>{
 
     it("Rendering the component",()=>{
         render(testComponent);
-        expect(screen.getByRole("heading",{name:"Upload a file"}));
+        expect(screen.getByRole("heading",{name:"Upload an audio file"}));
     });
 });
