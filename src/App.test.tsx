@@ -3,7 +3,7 @@ import "@testing-library/jest-dom";
 import { render, screen, fireEvent } from "@testing-library/react";
 import App from "./App";
 
-const fileFormLabel = "Upload a file";
+const fileFormLabel = "Upload an audio file";
 
 test("App component loads and displays file input form", () => {
   render(<App />);
