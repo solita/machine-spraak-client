@@ -59,7 +59,7 @@ const UploadFile = ():ReactElement=>{
           <Col md="10" xs="10">
             <Form.Group controlId="formFileLg" className="mb-3">
               <Form.Label>
-                <h4>Upload a file</h4>
+                <h4>Upload an audio file</h4>
               </Form.Label>
               <Form.Control
                 type="file"
