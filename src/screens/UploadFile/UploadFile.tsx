@@ -24,12 +24,12 @@ const UploadFile = ():ReactElement=>{
       if(!target.files){
         return;
       }
-      if (target.files[0].size > MAX_FILE_SIZE_BYTES) {
+      if (target.files[0]?.size > MAX_FILE_SIZE_BYTES) {
         setOutcome("Maximum file size is " + MAX_FILE_SIZE_BYTES + " bytes");
         handleReset();
         return;
       }
-      if (!SUPPORTED_FILE_TYPES.includes(target.files[0].type)) {
+      if (!SUPPORTED_FILE_TYPES.includes(target.files[0]?.type)) {
         setOutcome("File type must be one of: " + SUPPORTED_FILE_TYPES + ".");
         handleReset();
         return;
