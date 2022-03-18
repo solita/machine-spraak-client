@@ -73,13 +73,14 @@ const UploadFile = ():ReactElement=>{
         <Row className="justify-content-center mt-2 mb-0">
           <Col md="10" xs="10">
             <div>
-              <pre>
-                {file && <button onClick={handleUpload}>Upload</button>}{" "}
-                {file && file.name + " " + file.size + " bytes"}
-                {file && file.type && ", " + file.type}
-                {response}
-                {error}
-              </pre>
+              {file &&
+                <pre>
+                  <button onClick={handleUpload}>Upload</button>
+                  {` ${file.name}, ${file.size} bytes, ${file.type}`}         
+                </pre>
+              }
+              {response}
+              {error}
             </div>
             <div className="mt-1">
               {loading && <Spinner animation="border" role="status" />}
