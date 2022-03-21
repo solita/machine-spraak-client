@@ -39,13 +39,15 @@ const UploadFile = ():ReactElement=>{
     };
   
     const handleUpload = async () => {
-      if (file){
-        setLoading(true);
-        const serverResponse = await AudioAnalysisService.postFile(file);
-        setOutcome(serverResponse);
-        setLoading(false);
-        handleReset();
+      if (!file){
+        return;
       }
+      setLoading(true);
+      const serverResponse = await AudioAnalysisService.postFile(file);
+      setOutcome(serverResponse);
+      setLoading(false);
+      handleReset();
+      
     };
     return (
         <Container fluid="md">
