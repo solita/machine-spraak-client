@@ -22,12 +22,12 @@ const UploadFile = ():ReactElement=>{
         return;
       }
       if (target.files[0].size > MAX_FILE_SIZE_BYTES) {
-        setError("Maximum file size is " + MAX_FILE_SIZE_BYTES + " bytes");
+        setError(`Maximum file size is ${MAX_FILE_SIZE_BYTES} bytes`);
         handleReset();
         return;
       }
       if (!SUPPORTED_FILE_TYPES.includes(target.files[0].type)) {
-        setError("File type must be one of: " + SUPPORTED_FILE_TYPES + ".");
+        setError(`File type must be one of: ${SUPPORTED_FILE_TYPES}.`);
         handleReset();
         return;
       }
@@ -59,7 +59,7 @@ const UploadFile = ():ReactElement=>{
           <Col md="10" xs="10">
             <Form.Group controlId="formFileLg" className="mb-3">
               <Form.Label>
-                <h4>Upload a file</h4>
+                <h4>Upload an audio file</h4>
               </Form.Label>
               <Form.Control
                 type="file"
@@ -73,13 +73,14 @@ const UploadFile = ():ReactElement=>{
         <Row className="justify-content-center mt-2 mb-0">
           <Col md="10" xs="10">
             <div>
-              <pre>
-                {file && <button onClick={handleUpload}>Upload</button>}{" "}
-                {file && file.name + " " + file.size + " bytes"}
-                {file && file.type && ", " + file.type}
-                {response}
-                {error}
-              </pre>
+              {file &&
+                <pre>
+                  <button onClick={handleUpload}>Upload</button>
+                  {` ${file.name}, ${file.size} bytes, ${file.type}`}         
+                </pre>
+              }
+              {response}
+              {error}
             </div>
             <div className="mt-1">
               {loading && <Spinner animation="border" role="status" />}
