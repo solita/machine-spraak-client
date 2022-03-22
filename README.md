@@ -11,3 +11,9 @@ yarn start
 ```
 
 Navigate to `http://localhost:3000/`
+
+## Environments
+
+- Production : https://machinespraak.info/
+- Dev: https://dev.machinespraak.info/
+- Test: https://test.machinespraak.info/
