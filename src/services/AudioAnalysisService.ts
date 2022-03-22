@@ -19,8 +19,7 @@ Amplify.configure({
     },
 });
 
-//TODO: Change the type "any" to appropriate type
-async function postFile(file:any):Promise<string>{
+async function postFile(file:File):Promise<string>{
   try{
     const formData = new FormData();
     formData.append("file", file);
@@ -37,4 +36,4 @@ async function postFile(file:any):Promise<string>{
       return UNEXPECTED_SERVER_ERROR;
   }
 };
-export  {postFile};
+export {postFile};

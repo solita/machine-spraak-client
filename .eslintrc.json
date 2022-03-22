@@ -23,7 +23,8 @@
         "eqeqeq":"error",
         "no-console":"error",
         "no-unused-vars":"error",
-        "semi":"error"
+        "semi":"error",
+        "no-multi-spaces":"error"
     },
     "settings": {
         "react":{

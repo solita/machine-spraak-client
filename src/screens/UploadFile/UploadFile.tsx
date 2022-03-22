@@ -10,10 +10,13 @@ const MAX_FILE_SIZE_BYTES = 6000000;
 const SUPPORTED_FILE_TYPES = ["audio/wav", "audio/x-wav"];
 
 const UploadFile = ():ReactElement=>{
-    const [file, setFile] = useState<File| null>(null);
-    const [response, setResponse] = useState("");
-    const [error, setError] = useState("");
+    const [file, setFile] = useState<File|null>(null);
+    const [outcome, setOutcome] = useState("");
     const [loading, setLoading] = useState(false);
+
+    const handleReset = () => {
+      setFile(null);
+    };
 
     const handleSelectFile = (event:React.ChangeEvent) => {
       const target = event.target as HTMLInputElement;
@@ -21,37 +24,30 @@ const UploadFile = ():ReactElement=>{
       if(!target.files){
         return;
       }
-      if (target.files[0].size > MAX_FILE_SIZE_BYTES) {
-        setError(`Maximum file size is ${MAX_FILE_SIZE_BYTES} bytes`);
+      if (target.files[0]?.size > MAX_FILE_SIZE_BYTES) {
+        setOutcome(`Maximum file size is ${MAX_FILE_SIZE_BYTES} bytes`);
         handleReset();
         return;
       }
-      if (!SUPPORTED_FILE_TYPES.includes(target.files[0].type)) {
-        setError(`File type must be one of: ${SUPPORTED_FILE_TYPES}.`);
+      if (!SUPPORTED_FILE_TYPES.includes(target.files[0]?.type)) {
+        setOutcome(`File type must be one of: ${SUPPORTED_FILE_TYPES}.`);
         handleReset();
         return;
       }
       setFile(target.files[0]);
-      setResponse("");
-      setError("");
-    };
-  
-    const handleReset = () => {
-      setFile(null);
+      setOutcome("");
     };
   
     const handleUpload = async () => {
-      try {
-        setLoading(true);
-        const response = await AudioAnalysisService.postFile(file);
-        setResponse(response);
-      } 
-      //#TODO: Replace any with a suitable matching type
-      catch (error:any) {
-        setError(error.message);
+      if (!file){
+        return;
       }
+      setLoading(true);
+      const serverResponse = await AudioAnalysisService.postFile(file);
+      setOutcome(serverResponse);
       setLoading(false);
       handleReset();
+      
     };
     return (
         <Container fluid="md">
@@ -79,8 +75,7 @@ const UploadFile = ():ReactElement=>{
                   {` ${file.name}, ${file.size} bytes, ${file.type}`}         
                 </pre>
               }
-              {response}
-              {error}
+              {outcome}
             </div>
             <div className="mt-1">
               {loading && <Spinner animation="border" role="status" />}
